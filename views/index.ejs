@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <button id="slackBtn"> send slack</button>
+    <input type="text" id="slackId" />
+    <script>
+      $('#slackBtn').click(function(){
+        var userId = $('#slackId').val()
+        console.log(userId)
+        $.ajax({
+          method: 'post',
+          url : '/slack',
+          type : 'json',
+          data : {userId : userId},
+          success:function(data){
+            console.log(data)
+          },
+          error: function(error) {
+            console.log(error)
+          }
+        })
+      })
+    </script>
+  </body>
+</html>
